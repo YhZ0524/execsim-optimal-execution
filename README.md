@@ -27,3 +27,14 @@ Artifacts are written to `results/`: `grid_search.csv`, `summary.csv`, and PNG p
 </p>
 
 </details>
+## Method vs Baselines
+
+<p align="center">
+  <img src="./assets/compare_box.png" width="420" alt="IS distribution: Policy vs TWAP vs AC">
+  <img src="./assets/compare_bar.png" width="420" alt="IS mean with P25–P75">
+</p>
+
+<p align="center">
+  <img src="./assets/limit_share_bar.png" width="420" alt="Limit-order share by policy">
+</p>
+
