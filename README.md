@@ -1,57 +1,60 @@
 # Optimal Execution with Market and Limit Orders (Python)
 
-This repo implements an intraday execution simulator with order-book microstructure and casts execution as policy optimization. Prices follow a diffusion-like process, aggressive order flow arrives via a Poisson process, and limit-order fills depend on posting depth via an exponential fill model. A parametric policy trades off price improvement from resting bids and progress via market orders under a deviation band from a target schedule. A grid search with vectorized Monte Carlo selects policy hyperparameters.
+This repository implements an intraday execution simulator with order-book microstructure and casts execution as **policy optimization**. Prices follow a diffusion-like process, aggressive order flow is modeled via a Poisson arrival process, and limit-order fills depend on posting depth through an exponential fill curve. A parametric banded policy balances price improvement from resting bids with schedule catch-up via market orders. Hyperparameters are selected by vectorized Monte Carlo.
 
-## Data
-Data are synthetic and mimic China A-share microstructure: U-shaped aggressive order arrival intensity over time, discrete ticks, and a one-tick quoted spread.
+## What this repo provides
+- Synthetic **A-share–style** microstructure: U-shaped aggressive order intensity, discrete ticks, one-tick quoted spread.
+- Reproducible simulation and evaluation pipeline in Python (NumPy, Pandas, SciPy, Matplotlib).
+- Baselines: market-only TWAP and a front-loaded market schedule (AC-style).
+- Artifact writing to `results/` for easy inspection or downstream analysis.
 
-## Benchmarks
-Market-only TWAP and a front-loaded market schedule.
+## Install
 
-## Quickstart
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+source .venv/bin/activate
 python -m src.execsim.main
+source .venv/bin/activate
+python -m src.execsim.main_heavy
+source .venv/bin/activate
+python -m src.execsim.run_mm_study
 
 ## Outputs
-Artifacts are written to `results/`: `grid_search.csv`, `summary.csv`, and PNG plots.
-## Sample Results
-<details>
-<summary>Click to expand</summary>
+Artifacts are written to `results/`:
+- `summary.csv` policy vs baselines (average price, implementation shortfall, fill decomposition)
+- `grid_search.csv` Monte Carlo grid with mean/P25/P75 shortfall and selected hyperparameters
+- `mm_midprice_twap.png` mid-price paths and TWAP average-price panel
+- `mm_ac_inventory.png` AC target vs stepwise inventory with trigger boundary
+- `mm_is_benchmark.png` IS benchmark: algorithm average price vs TWAP
+- Additional plots from `main` or `main_heavy` runs
 
-<p align="center">
-  <img src="./assets/price.png" width="420" alt="Mid price path">
-  <img src="./assets/inventory.png" width="420" alt="Target vs filled inventory">
-</p>
+## Data note
+All experiments use **synthetic A-share–style data**. No proprietary or actual China A-share market data is included.
 
-<p align="center">
-  <img src="./assets/depth.png" width="600" alt="Posted depth over time">
-</p>
+## Benchmarks
+- **TWAP_Market**: market-only evenly spaced schedule  
+- **AC_Market**: front-loaded market schedule derived from AC-style target
 
-</details>
-## Method vs Baselines
+## Repo layout
 
-<p align="center">
-  <img src="./assets/compare_box.png" width="420" alt="IS distribution: Policy vs TWAP vs AC">
-  <img src="./assets/compare_bar.png" width="420" alt="IS mean with P25–P75">
-</p>
+src/execsim/
+data.py synthetic profile generator and schedules
+sim.py simulator with limit and market fills
+policy.py parametric banded policy
+benchmarks.py TWAP/AC baselines
+eval.py grid search and metrics
+plotting.py simple plot helpers
+main.py standard run producing results/
+main_heavy.py heavier grid and MC
+mm_data.py PDF-style midprice/AC helpers
+fig_midprice_twap.py
+fig_ac_inventory.py
+fig_is_benchmark.py
+run_mm_study.py one-shot driver for the three panels
 
-<p align="center">
-  <img src="./assets/limit_share_bar.png" width="420" alt="Limit-order share by policy">
-</p>
+## License
+MIT
 
-## Simulation Study (from PDF)
-<details>
-<summary>Click to expand</summary>
-
-<p align="center">
-  <img src="./assets/mm_midprice_twap.png" width="720" alt="MidPrice and TWAP panels">
-</p>
-
-<p align="center">
-  <img src="./assets/mm_ac_inventory.png" width="720" alt="AC target vs stepwise inventory with trigger boundary">
-</p>
-
-<p align="center">
-  <img src="./assets/mm_is_benchmark.png" width="720" alt="IS benchmark: algo average price vs TWAP">
-</p>
-
-</details>
+## Code and results
+github.com/YhZ0524/execsim-optimal-execution
