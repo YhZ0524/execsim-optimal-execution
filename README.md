@@ -13,10 +13,20 @@ This repository implements an intraday execution simulator with order-book micro
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .
+
+## Quickstart
+Run the standard experiment and produce artifacts:
+
 source .venv/bin/activate
 python -m src.execsim.main
+Heavier Monte Carlo grid (slower, more robust):
+
 source .venv/bin/activate
 python -m src.execsim.main_heavy
+
+## Simulation study (PDF-style panels)
+Generate the three panels used for portfolio-friendly demos:
+
 source .venv/bin/activate
 python -m src.execsim.run_mm_study
 
