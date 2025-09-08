@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: execsim
+Version: 0.1.0
+Summary: Optimal execution simulator with market and limit orders
+Requires-Python: >=3.9
+License-File: LICENSE
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scipy
+Requires-Dist: matplotlib
+Dynamic: license-file

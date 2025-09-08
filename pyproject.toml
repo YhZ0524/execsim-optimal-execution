@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "execsim"
+version = "0.1.0"
+description = "Optimal execution simulator with market and limit orders"
+requires-python = ">=3.9"
+dependencies = ["numpy", "pandas", "scipy", "matplotlib"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
