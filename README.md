@@ -13,3 +13,17 @@ python -m src.execsim.main
 
 ## Outputs
 Artifacts are written to `results/`: `grid_search.csv`, `summary.csv`, and PNG plots.
+## Sample Results
+<details>
+<summary>Click to expand</summary>
+
+<p align="center">
+  <img src="assets/price.png" width="420" alt="Mid price path">
+  <img src="assets/inventory.png" width="420" alt="Target vs filled inventory">
+</p>
+
+<p align="center">
+  <img src="assets/depth.png" width="600" alt="Posted depth over time">
+</p>
+
+</details>
