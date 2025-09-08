@@ -38,3 +38,20 @@ Artifacts are written to `results/`: `grid_search.csv`, `summary.csv`, and PNG p
   <img src="./assets/limit_share_bar.png" width="420" alt="Limit-order share by policy">
 </p>
 
+## Simulation Study (from PDF)
+<details>
+<summary>Click to expand</summary>
+
+<p align="center">
+  <img src="./assets/mm_midprice_twap.png" width="720" alt="MidPrice and TWAP panels">
+</p>
+
+<p align="center">
+  <img src="./assets/mm_ac_inventory.png" width="720" alt="AC target vs stepwise inventory with trigger boundary">
+</p>
+
+<p align="center">
+  <img src="./assets/mm_is_benchmark.png" width="720" alt="IS benchmark: algo average price vs TWAP">
+</p>
+
+</details>

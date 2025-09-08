@@ -64,8 +64,8 @@ class Simulator:
             cash -= add * (mid + hs + epsilon)
             q += add
             fills_mkt[-1] += add
-        avg_price = cash / q_total
-        arrival_ref = self.profile.loc[0, "mid"]
+        avg_price = (-cash) / q_total
+        arrival_ref = float(self.profile.loc[0, "mid"])
         shortfall = avg_price - arrival_ref
         out = {"avg_price": avg_price, "shortfall": shortfall, "q_filled": q, "fills_lim": np.array(fills_lim), "fills_mkt": np.array(fills_mkt), "depths": np.array(depths), "mids": mids}
         return out
